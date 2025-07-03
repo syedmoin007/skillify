@@ -1,8 +1,13 @@
 import React from 'react';
-import { useAuth } from '../firebase'; // You'll set this up later
+import { useAuth } from '../firebase/auth.js';
+<firebasee></firebasee>
 
 export default function Profile() {
-  const currentUser = useAuth(); // Hook to get logged-in user
+  const currentUser = useAuth();
+
+  if (currentUser === undefined) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">

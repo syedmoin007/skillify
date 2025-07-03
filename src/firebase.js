@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -10,6 +10,8 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-const app = initializeApp(firebaseConfig);
+// Prevent duplicate initialization:
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();

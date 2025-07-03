@@ -1,13 +1,38 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global transitions for interactive elements */
+a, button, [role="button"], .transition {
+  @apply transition-colors transition-transform duration-200;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Subtle light theme with Star Wars-inspired accent */
+body {
+  @apply bg-gray-50 text-gray-900 font-sans;
+  background-image: radial-gradient(circle at top left, rgba(255, 245, 235, 0.4), transparent),
+    url('https://www.transparenttextures.com/patterns/stardust.png'); /* free subtle star texture */
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+h1, h2, h3 {
+  @apply font-bold;
+}
+
+/* Accent highlight using Jedi blue */
+.accent {
+  @apply text-blue-600;
+}
+
+/* Button Star Wars hover glow */
+.btn-starwars {
+  @apply bg-blue-600 text-white rounded px-4 py-2 shadow-md hover:bg-blue-700 hover:shadow-lg;
+  text-shadow: 0 0 5px rgba(0, 153, 255, 0.7);
+}
+.lightsaber {
+  height: 4px;
+  background: linear-gradient(to right, #00bfff, #00ffff);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px #00ffff;
 }

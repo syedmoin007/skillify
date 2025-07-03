@@ -1,33 +1,18 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-
-// Your Firebase config (get this from your Firebase project)
+import { initializeApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { setLogLevel } from 'firebase/app';
+setLogLevel('debug');
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY_HERE",
-  authDomain: "YOUR_AUTH_DOMAIN_HERE",
-  projectId: "YOUR_PROJECT_ID_HERE",
-  storageBucket: "YOUR_STORAGE_BUCKET_HERE",
-  messagingSenderId: "YOUR_SENDER_ID_HERE",
-  appId: "YOUR_APP_ID_HERE"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Prevent duplicate initialization
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+
 export const auth = getAuth(app);
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDQkg3pJhp71cCiJM4sp_4mx7GdvAuqsgo",
-  authDomain: "skillify-113e7.firebaseapp.com",
-  projectId: "skillify-113e7",
-  storageBucket: "skillify-113e7.firebasestorage.app",
-  messagingSenderId: "422092249529",
-  appId: "1:422092249529:web:f642be5e9bb85b60af3e68"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
