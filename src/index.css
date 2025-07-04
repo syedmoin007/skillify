@@ -2,37 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global transitions for interactive elements */
-a, button, [role="button"], .transition {
+/* Smooth transitions globally */
+* {
   @apply transition-colors transition-transform duration-200;
 }
 
-/* Subtle light theme with Star Wars-inspired accent */
 body {
   @apply bg-gray-50 text-gray-900 font-sans;
-  background-image: radial-gradient(circle at top left, rgba(255, 245, 235, 0.4), transparent),
-    url('https://www.transparenttextures.com/patterns/stardust.png'); /* free subtle star texture */
-  background-repeat: repeat;
-  background-size: auto;
+  background-image: radial-gradient(circle at top left, #e0e7ff, #f0f4ff);
 }
 
-h1, h2, h3 {
-  @apply font-bold;
+/* Button glow hover for Star Wars vibe */
+.button-glow {
+  @apply relative inline-block transition-transform transform hover:scale-105;
 }
 
-/* Accent highlight using Jedi blue */
-.accent {
-  @apply text-blue-600;
-}
-
-/* Button Star Wars hover glow */
-.btn-starwars {
-  @apply bg-blue-600 text-white rounded px-4 py-2 shadow-md hover:bg-blue-700 hover:shadow-lg;
-  text-shadow: 0 0 5px rgba(0, 153, 255, 0.7);
-}
-.lightsaber {
-  height: 4px;
-  background: linear-gradient(to right, #00bfff, #00ffff);
+.button-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   border-radius: 9999px;
-  box-shadow: 0 0 10px #00ffff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.button-glow:hover::after {
+  opacity: 1;
 }

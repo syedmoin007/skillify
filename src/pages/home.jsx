@@ -1,17 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 
-export default function home() {
+export default function Home() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900 text-yellow-300 p-8">
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-center">
-        Welcome to Skillify 🚀
-      </h1>
-      <p className="text-center text-lg mb-8 max-w-xl">
-        The galaxy’s first peer-to-peer skill swap platform. Train in React, Tailwind, or the ways of the Force.
+    <div className="flex flex-col items-center justify-center min-h-screen text-center space-y-6">
+      <h1 className="text-5xl font-starwars text-yellow-500">Skillify</h1>
+      <p className="text-xl max-w-md">
+        Trade skills, learn from peers, and grow your abilities across the galaxy.
       </p>
-      <Button>
-        <a href="/auth">Get Started</a>
-      </Button>
+      <Button color="blue" onClick={() => navigate('/auth')}>Get Started</Button>
+      <footer className="mt-10 text-gray-500 text-sm">
+        Hidden Yoda: "Do or do not, there is no try."
+      </footer>
     </div>
   );
 }

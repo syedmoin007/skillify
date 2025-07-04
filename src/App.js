@@ -1,19 +1,32 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
-import Auth from "./pages/Auth";
-import Profile from "./pages/Profile";
-import Dashboard from "./pages/Dashboard";
-import Matches from "./pages/Matches"; // ✅ add this line
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './firebase/auth';
+
+import Home from './pages/home';
+import Auth from './pages/Auth';
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
+import FindSkills from './pages/FindSkills';
+import OfferSkills from './pages/OfferSkills';
 
 function App() {
+  const currentUser = useAuth();
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/matches" element={<Matches />} /> {/* ✅ add this line */}
+        {/* Public Route */}
+        <Route path="/auth" element={!currentUser ? <Auth /> : <Navigate to="/dashboard" />} />
+
+        {/* Protected Routes */}
+        <Route path="/" element={currentUser ? <Home /> : <Navigate to="/auth" />} />
+        <Route path="/dashboard" element={currentUser ? <Dashboard /> : <Navigate to="/auth" />} />
+        <Route path="/profile" element={currentUser ? <Profile /> : <Navigate to="/auth" />} />
+        <Route path="/find-skills" element={currentUser ? <FindSkills /> : <Navigate to="/auth" />} />
+        <Route path="/offer-skills" element={currentUser ? <OfferSkills /> : <Navigate to="/auth" />} />
+
+        {/* Catch-all */}
+        <Route path="*" element={<Navigate to={currentUser ? "/" : "/auth"} />} />
       </Routes>
     </BrowserRouter>
   );
